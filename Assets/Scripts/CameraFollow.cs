@@ -18,7 +18,7 @@ public class CameraFollow : MonoBehaviour
         // If no target is assigned, try to find the player
         if (target == null)
         {
-            playerMovement player = FindObjectOfType<playerMovement>();
+            PlayerMovement player = Object.FindFirstObjectByType<PlayerMovement>();
             if (player != null)
             {
                 target = player.transform;
