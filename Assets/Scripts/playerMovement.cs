@@ -16,6 +16,15 @@ public class PlayerMovement : MonoBehaviour
     private GameObject currentJoystick;
     private Quaternion targetRotation;
     
+    public enum ControlScheme
+    {
+        WASD,
+        Arrows
+        // Add more if needed (e.g., Gamepad1, Gamepad2)
+    }
+
+    public ControlScheme controlScheme = ControlScheme.WASD;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,11 +42,23 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (useKeyboardInput)
+        float h = 0f, v = 0f;
+
+        switch (controlScheme)
         {
-            HandleKeyboardInput();
+            case ControlScheme.WASD:
+                h = Input.GetKey(KeyCode.A) ? -1 : Input.GetKey(KeyCode.D) ? 1 : 0;
+                v = Input.GetKey(KeyCode.W) ? 1 : Input.GetKey(KeyCode.S) ? -1 : 0;
+                break;
+            case ControlScheme.Arrows:
+                h = Input.GetKey(KeyCode.LeftArrow) ? -1 : Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
+                v = Input.GetKey(KeyCode.UpArrow) ? 1 : Input.GetKey(KeyCode.DownArrow) ? -1 : 0;
+                break;
         }
-        
+
+        Vector3 move = new Vector3(h, 0, v).normalized;
+        moveDirection = move; // <-- THIS LINE IS NEEDED
+
         // Handle mobile joystick input (will be implemented later)
         HandleMobileInput();
         
