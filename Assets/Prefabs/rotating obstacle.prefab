@@ -609,3 +609,9 @@ MonoBehaviour:
   loopMovement: 1
   pingPongMovement: 0
   showGizmos: 1
+  onMaterial: {fileID: 2100000, guid: 3c908e5dcfebc419fb2a8e178dd0bfc5, type: 2}
+  offMaterial: {fileID: 2100000, guid: 10fa74e8efc0a451d9643b0391360f60, type: 2}
+  obstacleRenderers:
+  - {fileID: 9022018299326491456}
+  - {fileID: 8825875652483486014}
+  - {fileID: 6994712971172690977}

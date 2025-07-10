@@ -19,15 +19,26 @@ public class MovingObstacle : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool showGizmos = true;
     
+    [Header("Visuals")]
+    public Material onMaterial;
+    public Material offMaterial;
+    public Renderer[] obstacleRenderers; // Assign in inspector or get in Start()
+    
     private int currentWaypointIndex = 0;
     private bool movingForward = true;
     private Vector3 startPosition;
     private Quaternion startRotation;
     private Rigidbody movingRb;
+    private Texture originalBaseMap;
+    private bool baseMapOn = true;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (obstacleRenderers == null)
+            obstacleRenderers = GetComponentsInChildren<Renderer>();
+
+        
         // Use obstacleToMove if assigned, otherwise use this object
         Transform movingTransform = obstacleToMove != null ? obstacleToMove : transform;
         movingRb = movingTransform.GetComponent<Rigidbody>();
@@ -45,14 +56,33 @@ public class MovingObstacle : MonoBehaviour
             Debug.LogWarning("MovingObstacle: Moving platform needs at least 2 waypoints!");
             movingPlatform = false;
         }
+        UpdateMaterial();
+
+        if (movingPlatform && (waypoints == null || waypoints.Length < 2 || waypoints[0] == null || waypoints[1] == null))
+        {
+            Debug.LogWarning("MovingObstacle: Turning obstacle needs at least 2 valid waypoints!");
+            movingPlatform = false;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TogglePlatformActive()
+    {
+        movingPlatform = !movingPlatform;
+        UpdateMaterial();
+    }
+
+    public void ToggleTurningActive()
+    {
+        turningObstacle = !turningObstacle;
+        UpdateMaterial();
+    }
+    
+    void FixedUpdate()
     {
         if (movingPlatform)
         {
             MoveBetweenWaypoints();
+            
         }
         else if (turningObstacle)
         {
@@ -90,7 +120,7 @@ public class MovingObstacle : MonoBehaviour
         
         // Calculate movement for this frame
         Vector3 direction = (targetWaypoint.position - movingTransform.position).normalized;
-        float moveDistance = speed * Time.deltaTime;
+        float moveDistance = speed * Time.fixedDeltaTime;
         
         // Check if we would overshoot the waypoint
         if (moveDistance > distanceToWaypoint)
@@ -152,12 +182,24 @@ public class MovingObstacle : MonoBehaviour
         // For rotation, use Rigidbody.MoveRotation if rotating the whole object
         if (rotatingTransform == (obstacleToMove != null ? obstacleToMove : transform))
         {
-            Quaternion deltaRotation = Quaternion.Euler(0, rotationDirection * speed * Time.deltaTime, 0);
+            Quaternion deltaRotation = Quaternion.Euler(0, rotationDirection * speed * Time.fixedDeltaTime, 0);
             rotatingRb.MoveRotation(rotatingRb.rotation * deltaRotation);
         }
         else
         {
-            rotatingTransform.Rotate(0, rotationDirection * speed * Time.deltaTime, 0);
+            rotatingTransform.Rotate(0, rotationDirection * speed * Time.fixedDeltaTime, 0);
+        }
+    }
+    
+    
+    private void UpdateMaterial()
+    {
+        if (obstacleRenderers == null) return;
+        bool isActive = movingPlatform || turningObstacle;
+        foreach (var rend in obstacleRenderers)
+        {
+            if (rend != null)
+                rend.material = isActive ? onMaterial : offMaterial;
         }
     }
     
