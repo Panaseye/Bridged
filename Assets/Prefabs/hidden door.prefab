@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4111858779311528718}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 4, y: 4, z: 0.00001}
+  m_LocalPosition: {x: 4, y: 4, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99,12 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3bb5c94f974e46da8796d04038e66ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closedPosition: {x: 0, y: 0, z: -15}
-  openedPosition: {x: 0, y: 0, z: 0}
-  moveDuration: 1
-  doorRenderer: {fileID: 0}
-  idleMaterial: {fileID: 0}
-  movingMaterial: {fileID: 0}
+  closedPosition: {x: 4, y: 4, z: 0.01}
+  openedPosition: {x: 4, y: -0.2, z: 0.01}
+  moveDuration: 2
+  doorRenderer: {fileID: 2792078576568001357}
+  idleMaterial: {fileID: 2100000, guid: 5ed0d2292d0e45b4cb8d383137de813c, type: 2}
+  movingMaterial: {fileID: 2100000, guid: e5e901d76e0e84df9a9769de65910093, type: 2}
   onOpened:
     m_PersistentCalls:
       m_Calls: []
@@ -138,7 +138,7 @@ Transform:
   m_GameObject: {fileID: 7054608672509763374}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.49, y: 0.01, z: -13.43}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

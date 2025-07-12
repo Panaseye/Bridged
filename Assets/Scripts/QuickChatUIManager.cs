@@ -51,19 +51,19 @@ public class QuickChatUIManager : MonoBehaviour
     }
 
     public void SendMessage()
-{
+    {
     Debug.Log("SendMessage called. selectedIcons.Count = " + selectedIcons.Count);
     if (selectedIcons.Count > 0 && playerSpeechBubble != null)
-    {
+        {
         playerSpeechBubble.ShowBubble(selectedIcons);
-        ClearMessageLine();
-        trayPanel.SetActive(false);
-    }
+            ClearMessageLine();
+            trayPanel.SetActive(false);
+        }
     else
     {
         Debug.LogWarning("SendMessage: No icons or playerSpeechBubble is null.");
     }
-}
+    }
 
     private void PopulateIconGrid()
     {
