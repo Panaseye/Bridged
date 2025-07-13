@@ -7,6 +7,8 @@ public class PlayerSpeechBubble : MonoBehaviour
     public GameObject bubblePrefab;
     public Transform bubbleAnchor;
     public GameObject bubbleIconImagePrefab;
+    public SpeechBubbleReplicaManager otherPlayerReplicaManager; // Assign in Inspector
+    public float bubbleDuration = 5f;
     
 
       public void ShowBubble(List<Sprite> icons)
@@ -28,6 +30,12 @@ public class PlayerSpeechBubble : MonoBehaviour
           Debug.Log("imgObj: " + imgObj);
           imgObj.GetComponent<Image>().sprite = icon;
       }
-      Destroy(bubble, 2f);
+      Destroy(bubble, bubbleDuration);
+
+      // Show replica on the other player's HUD
+      if (otherPlayerReplicaManager != null)
+      {
+          otherPlayerReplicaManager.ShowReplica(icons);
+      }
   }
 }
