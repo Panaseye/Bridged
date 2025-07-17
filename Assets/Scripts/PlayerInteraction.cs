@@ -14,6 +14,7 @@ public class PlayerInteraction : MonoBehaviour
     private GrabbableObject heldObject;
     private List<GrabbableObject> nearbyGrabbables = new List<GrabbableObject>();
     private List<Socket> nearbySockets = new List<Socket>();
+    private InteractableButton nearbyButton;
     private Socket highlightedSocket;
 
     void Update()
@@ -21,9 +22,15 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(interactKey))
         {
             // HINT INTERACTION
-            if (nearbyHint != null && nearbyHint.mode == HintInteractable.HintMode.Toggle)
+            if (nearbyHint != null)
             {
                 nearbyHint.Interact(myHintUIManager);
+                return;
+            }
+            // BUTTON INTERACTION
+            if (nearbyButton != null)
+            {
+                nearbyButton.Interact();
                 return;
             }
             // GRABBABLE/SOCKET INTERACTION
@@ -103,9 +110,12 @@ public class PlayerInteraction : MonoBehaviour
             nearbyHint = hint;
             if (hint.mode == HintInteractable.HintMode.Hold)
             {
-                hint.Interact(myHintUIManager);
+                hint.OnEnterRange(myHintUIManager);
             }
         }
+        InteractableButton button = other.GetComponent<InteractableButton>();
+        if (button != null)
+            nearbyButton = button;
     }
 
     void OnTriggerExit(Collider other)
@@ -123,6 +133,9 @@ public class PlayerInteraction : MonoBehaviour
             hint.EndInteract();
             nearbyHint = null;
         }
+        InteractableButton button = other.GetComponent<InteractableButton>();
+        if (button != null && nearbyButton == button)
+            nearbyButton = null;
     }
 
     GrabbableObject GetClosestGrabbable()

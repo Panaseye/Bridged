@@ -5,7 +5,9 @@ public class MovingObstacle : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float speed = 2f;
     [SerializeField] private bool directionLeft = true;
-    
+    [SerializeField] private bool isMovementOn = false;
+    [SerializeField] private bool movementOverride = false;
+    [SerializeField] private bool noMovementOverride = false;
     [Header("Obstacle Type")]
     [SerializeField] private bool movingPlatform = false;
     [SerializeField] private bool turningObstacle = false;
@@ -31,6 +33,19 @@ public class MovingObstacle : MonoBehaviour
     private Rigidbody movingRb;
     private Texture originalBaseMap;
     private bool baseMapOn = true;
+    
+     // Exposed in Inspector for initial state
+
+    public bool IsMovementOn
+    {
+        get => isMovementOn;
+        set
+        {
+            if (isMovementOn == value) return;
+            isMovementOn = value;
+            UpdateMaterial();
+        }
+    }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -63,6 +78,11 @@ public class MovingObstacle : MonoBehaviour
             Debug.LogWarning("MovingObstacle: Turning obstacle needs at least 2 valid waypoints!");
             movingPlatform = false;
         }
+
+        if (isMovementOn)
+            StartMovement();
+        else
+            StopMovement();
     }
 
     public void TogglePlatformActive()
@@ -79,6 +99,8 @@ public class MovingObstacle : MonoBehaviour
     
     void FixedUpdate()
     {
+        if (!isMovementOn) return; // Only move if ON
+
         if (movingPlatform)
         {
             MoveBetweenWaypoints();
@@ -195,7 +217,8 @@ public class MovingObstacle : MonoBehaviour
     private void UpdateMaterial()
     {
         if (obstacleRenderers == null) return;
-        bool isActive = movingPlatform || turningObstacle;
+        // Only "on" if movement is enabled and the obstacle is set to move
+        bool isActive = isMovementOn && (movingPlatform || turningObstacle);
         foreach (var rend in obstacleRenderers)
         {
             if (rend != null)
@@ -239,6 +262,37 @@ public class MovingObstacle : MonoBehaviour
         }
         waypoints = null;
         currentWaypointIndex = 0;
+    }
+    
+    public void StartMovement()
+    {
+        if(!noMovementOverride)
+        IsMovementOn = true;
+    }
+
+    public void StopMovement()
+    {
+        if(!movementOverride)
+        IsMovementOn = false;
+    }
+
+    public void StartMovementOverride()
+    {
+        movementOverride = true;
+        IsMovementOn = true;
+    }
+
+    public void StopMovementOverride()
+    {
+        noMovementOverride = true;
+        IsMovementOn = false;
+    }
+    
+
+    public void ToggleMovement()
+    {
+        if(!movementOverride || !noMovementOverride)
+        IsMovementOn = !IsMovementOn;
     }
     
     // Draw gizmos in the editor

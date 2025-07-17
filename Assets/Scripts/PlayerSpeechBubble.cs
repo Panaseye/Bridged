@@ -11,10 +11,10 @@ public class PlayerSpeechBubble : MonoBehaviour
     public float bubbleDuration = 5f;
     
 
-      public void ShowBubble(List<Sprite> icons)
-  {
+    public void ShowBubble(List<Sprite> icons)
+    {
       Debug.Log("ShowBubble called with " + icons.Count + " icons");
-      GameObject bubble = Instantiate(bubblePrefab, bubbleAnchor.position, Quaternion.identity, bubbleAnchor);
+        GameObject bubble = Instantiate(bubblePrefab, bubbleAnchor.position, Quaternion.identity, bubbleAnchor);
       Debug.Log("Bubble instantiated: " + bubble);
       Transform iconPanel = bubble.transform.Find("background panel/iconPanel");
       Debug.Log("iconPanel: " + iconPanel);
@@ -24,12 +24,12 @@ public class PlayerSpeechBubble : MonoBehaviour
       foreach (Transform child in iconPanel)
           Destroy(child.gameObject);
 
-      foreach (Sprite icon in icons)
-      {
+        foreach (Sprite icon in icons)
+        {
           GameObject imgObj = Instantiate(bubbleIconImagePrefab, iconPanel);
           Debug.Log("imgObj: " + imgObj);
-          imgObj.GetComponent<Image>().sprite = icon;
-      }
+            imgObj.GetComponent<Image>().sprite = icon;
+        }
       Destroy(bubble, bubbleDuration);
 
       // Show replica on the other player's HUD
@@ -37,5 +37,5 @@ public class PlayerSpeechBubble : MonoBehaviour
       {
           otherPlayerReplicaManager.ShowReplica(icons);
       }
-  }
+    }
 }

@@ -41,6 +41,9 @@ public class QuickChatUIManager : MonoBehaviour
         Debug.Log("Added icon: " + icon.name + " | Total: " + selectedIcons.Count);
         GameObject imgObj = Instantiate(iconImagePrefab, messageLinePanel);
         imgObj.GetComponent<Image>().sprite = icon;
+
+        // Force layout rebuild
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)messageLinePanel);
     }
 
     public void ClearMessageLine()

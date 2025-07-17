@@ -14,12 +14,16 @@ public class InteractableButton : MonoBehaviour
     [Header("Blink Color")]
     public Color blinkColor; // The color to blink towards
 
-    private Renderer rend;
+    [SerializeField] private Renderer rend;
     private Material runtimeMaterial; // Instance for blinking
     private Color baseColor;
 
     [Header("Interaction Event")]
     public UnityEvent onInteract;
+
+    [Header("Lever Animation (optional)")]
+    public bool isLever = false;
+    public Animator leverAnimator; // Assign if this is a lever
 
     // Optional: assign in inspector or dynamically
     // public GameObject thingToActivate;
@@ -27,7 +31,10 @@ public class InteractableButton : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rend = GetComponent<Renderer>();
+        if (rend == null)
+        {
+            rend = GetComponent<Renderer>();
+        }
         SetButtonMaterial();
     }
 
@@ -62,16 +69,19 @@ public class InteractableButton : MonoBehaviour
             runtimeMaterial.color = lerpedColor;
         }
 
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-        }
     }
 
-    void Interact()
+    public void Interact()
     {
         isOn = !isOn;
         SetButtonMaterial();
+
+        // Lever animation logic
+        if (isLever && leverAnimator != null)
+        {
+            leverAnimator.SetBool("LeverUp", isOn);
+        }
+
         Debug.Log("Button pressed! (implement your logic here)");
         onInteract.Invoke();
     }

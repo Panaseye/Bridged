@@ -20,6 +20,7 @@ public class DoorOrGate : MonoBehaviour
     public UnityEvent onOpened;
     public UnityEvent onClosed;
 
+    [SerializeField] bool openOveride = false;
     private bool isOpen = false;
     private Coroutine moveRoutine;
 
@@ -54,9 +55,18 @@ public class DoorOrGate : MonoBehaviour
         }
     }
 
+    public void OpenOverride()
+    {       openOveride = true;
+            isOpen = true;
+            MoveTo(openedPosition);
+            onOpened.Invoke();
+           
+        
+    }
+
     public void Close()
     {
-        if (isOpen)
+        if (isOpen && !openOveride)
         {
             isOpen = false;
             MoveTo(closedPosition);
@@ -66,7 +76,7 @@ public class DoorOrGate : MonoBehaviour
 
     public void Toggle()
     {
-        if (isOpen)
+        if (isOpen && !openOveride)
             Close();
         else
             Open();

@@ -12,24 +12,10 @@ public class HintInteractable : MonoBehaviour
     private bool isHintVisible = false;
     private HintUIManager currentUI;
 
-    public void Interact(HintUIManager ui)
+    // Call this when player enters range
+    public void OnEnterRange(HintUIManager ui)
     {
-        if (mode == HintMode.Toggle)
-        {
-            if (!isHintVisible)
-            {
-                ui.ShowHint(hintMessage, hintIcons);
-                isHintVisible = true;
-                currentUI = ui;
-            }
-            else
-            {
-                ui.HideHint();
-                isHintVisible = false;
-                currentUI = null;
-            }
-        }
-        else if (mode == HintMode.Hold)
+        if (mode == HintMode.Hold && !isHintVisible)
         {
             ui.ShowHint(hintMessage, hintIcons);
             isHintVisible = true;
@@ -37,7 +23,24 @@ public class HintInteractable : MonoBehaviour
         }
     }
 
-    // Always called when player leaves, regardless of mode
+    // Call this when player presses interact
+    public void Interact(HintUIManager ui)
+    {
+        if (!isHintVisible)
+        {
+            ui.ShowHint(hintMessage, hintIcons);
+            isHintVisible = true;
+            currentUI = ui;
+        }
+        else
+        {
+            ui.HideHint();
+            isHintVisible = false;
+            currentUI = null;
+        }
+    }
+
+    // Call this when player leaves range
     public void EndInteract()
     {
         if (isHintVisible && currentUI != null)

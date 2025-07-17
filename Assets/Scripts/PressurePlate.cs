@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using System.Collections.Generic; // Added for HashSet
 
 public class PressurePlate : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PressurePlate : MonoBehaviour
     public UnityEvent onPressed;
     public UnityEvent onReleased;
 
-    private int objectsOnPlate = 0;
+    private HashSet<GameObject> objectsOnPlate = new HashSet<GameObject>();
     [SerializeField] private int neededObjectsOnPlate;
     [SerializeField] private Renderer plateRenderer;
     [SerializeField] private Material pressedMaterial;
@@ -28,16 +29,18 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Or use layers/tags for other objects
+        if (other.CompareTag("Player"))
         {
-            objectsOnPlate++;
-            if (objectsOnPlate == neededObjectsOnPlate)
+            // Only add if not already present
+            if (objectsOnPlate.Add(other.gameObject))
             {
-                onPressed.Invoke();
-                plateRenderer.material = pressedMaterial;
-                AnimatePlate(true);
+                if (objectsOnPlate.Count == neededObjectsOnPlate)
+                {
+                    onPressed.Invoke();
+                    plateRenderer.material = pressedMaterial;
+                    AnimatePlate(true);
+                }
             }
-                
         }
     }
 
@@ -45,12 +48,15 @@ public class PressurePlate : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            objectsOnPlate--;
-            if (objectsOnPlate != neededObjectsOnPlate)
+            // Only remove if present
+            if (objectsOnPlate.Remove(other.gameObject))
             {
-                onReleased.Invoke();
-                plateRenderer.material = releasedMaterial;
-                AnimatePlate(false);
+                if (objectsOnPlate.Count != neededObjectsOnPlate)
+                {
+                    onReleased.Invoke();
+                    plateRenderer.material = releasedMaterial;
+                    AnimatePlate(false);
+                }
             }
         }
     }
