@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="67ac566c-0997-48ce-896e-8db800b59b62" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../External assets/DungeonModularPack/Materials/M_Wall move.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../External assets/DungeonModularPack/Materials/M_Wall move.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../External assets/DungeonModularPack/Materials/M_Wall.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../External assets/DungeonModularPack/Materials/M_Wall.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Prefabs/hidden door.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefabs/hidden door.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scenes/Interaction.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scenes/Interaction.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scenes/Movement.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/Movement.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuickChatUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuickChatUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Materials/M_Wall move.mat" beforeDir="false" afterPath="$PROJECT_DIR$/../Materials/M_Wall move.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Prefabs/player group 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefabs/player group 2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Prefabs/player group.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefabs/player group.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/Playground.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/Playground.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InteractableButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InteractableButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/playerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TutorialInfo/Scripts/Editor/ReadmeEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../TutorialInfo/Scripts/Editor/ReadmeEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TutorialInfo/Scripts/Editor/ReadmeEditor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../TutorialInfo/Scripts/Editor/ReadmeEditor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TutorialInfo/Scripts/Readme.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../TutorialInfo/Scripts/Readme.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TutorialInfo/Scripts/Readme.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../TutorialInfo/Scripts/Readme.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +26,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/HintUIManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/InteractableButton.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/PressurePlate.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -28,15 +40,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="67ac566c-0997-48ce-896e-8db800b59b62" name="Changes" comment="" />
@@ -46,6 +63,7 @@
       <updated>1752161134144</updated>
       <workItem from="1752161135657" duration="2000" />
       <workItem from="1752331999435" duration="1000" />
+      <workItem from="1753965509601" duration="1948000" />
     </task>
     <servers />
   </component>

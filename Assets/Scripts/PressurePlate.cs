@@ -20,11 +20,21 @@ public class PressurePlate : MonoBehaviour
     private Vector3 originalScale;
     private Vector3 originalPosition;
     private Coroutine scaleRoutine;
+    private bool isPressed = false;
+
+    public AudioClip pressedSound;
+    public AudioClip releasedSound;
+    [SerializeField] private AudioSource audioSource;
 
     void Start()
     {
+
         originalScale = transform.localScale;
         originalPosition = transform.localPosition;
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -39,6 +49,9 @@ public class PressurePlate : MonoBehaviour
                     onPressed.Invoke();
                     plateRenderer.material = pressedMaterial;
                     AnimatePlate(true);
+                    if (audioSource != null && pressedSound != null && !isPressed)
+                        audioSource.PlayOneShot(pressedSound);
+                    isPressed = true;
                 }
             }
         }
@@ -56,6 +69,9 @@ public class PressurePlate : MonoBehaviour
                     onReleased.Invoke();
                     plateRenderer.material = releasedMaterial;
                     AnimatePlate(false);
+                    if (audioSource != null && releasedSound != null && isPressed)
+                        audioSource.PlayOneShot(releasedSound);
+                    isPressed = false;
                 }
             }
         }
@@ -94,4 +110,9 @@ public class PressurePlate : MonoBehaviour
         transform.localScale = endScale;
         transform.localPosition = endPos;
     }
+
+
+
+
+    
 }

@@ -6,6 +6,7 @@ public class InteractableButton : MonoBehaviour
     private bool playerInRange = false;
     private bool isOn = false;
     private float blinkTimer = 0f;
+    
 
     [Header("Materials")]
     public Material offMaterial;
@@ -24,6 +25,9 @@ public class InteractableButton : MonoBehaviour
     [Header("Lever Animation (optional)")]
     public bool isLever = false;
     public Animator leverAnimator; // Assign if this is a lever
+    public AudioClip activateSound;
+    public AudioClip deactivateSound;
+    [SerializeField] private AudioSource audioSource;
 
     // Optional: assign in inspector or dynamically
     // public GameObject thingToActivate;
@@ -31,6 +35,10 @@ public class InteractableButton : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if(isLever && audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
         if (rend == null)
         {
             rend = GetComponent<Renderer>();
@@ -80,6 +88,15 @@ public class InteractableButton : MonoBehaviour
         if (isLever && leverAnimator != null)
         {
             leverAnimator.SetBool("LeverUp", isOn);
+            
+        }
+
+        if (audioSource != null)
+        {
+            if (isOn && activateSound != null)
+                audioSource.PlayOneShot(activateSound);
+            else if (!isOn && deactivateSound != null)
+                audioSource.PlayOneShot(deactivateSound);
         }
 
         Debug.Log("Button pressed! (implement your logic here)");

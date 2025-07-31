@@ -16,6 +16,11 @@ public class DoorOrGate : MonoBehaviour
     public Material idleMaterial;
     public Material movingMaterial;
 
+    [Header("Audio")]
+    public AudioClip openSound;
+    public AudioClip lockedSound;
+    [SerializeField] private AudioSource audioSource;
+
     [Header("Events")]
     public UnityEvent onOpened;
     public UnityEvent onClosed;
@@ -23,10 +28,15 @@ public class DoorOrGate : MonoBehaviour
     [SerializeField] bool openOveride = false;
     private bool isOpen = false;
     private Coroutine moveRoutine;
-
+    private bool fullyOpened = false;
+    private bool fullyclosed = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
         // Set initial position and material
         if (closedPosition == Vector3.zero)
         {
@@ -56,10 +66,19 @@ public class DoorOrGate : MonoBehaviour
     }
 
     public void OpenOverride()
-    {       openOveride = true;
+    {       
+        openOveride = true;
+
             isOpen = true;
-            MoveTo(openedPosition);
-            onOpened.Invoke();
+            if (!fullyOpened){
+                MoveTo(openedPosition);
+                onOpened.Invoke();
+            }
+            else{
+                if (audioSource != null && lockedSound != null)
+                    audioSource.PlayOneShot(lockedSound);
+            }
+            
            
         
     }
@@ -91,6 +110,11 @@ public class DoorOrGate : MonoBehaviour
 
     private IEnumerator MoveDoor(Vector3 targetPos)
     {
+        fullyOpened = false;
+        fullyclosed = false;
+        if (audioSource != null && openSound != null && !(targetPos == openedPosition && fullyOpened))
+            audioSource.PlayOneShot(openSound);
+
         if (doorRenderer != null && movingMaterial != null)
             doorRenderer.material = movingMaterial;
 
@@ -105,6 +129,14 @@ public class DoorOrGate : MonoBehaviour
             yield return null;
         }
         transform.localPosition = targetPos;
+        if (targetPos == openedPosition)
+        {
+            fullyOpened = true;
+        }
+        if (targetPos == closedPosition)
+        {
+            fullyclosed = true;
+        }
 
         SetIdleMaterial();
     }

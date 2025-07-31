@@ -12,9 +12,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject joystickPrefab;
     
     private Rigidbody rb;
+    private Animator animator;
     private Vector3 moveDirection;
     private GameObject currentJoystick;
     private Quaternion targetRotation;
+
+    public AudioSource stepAudioSource; // Assign in Inspector or get in Start()
+    public float minMoveThreshold = 0.1f; // Minimum movement to count as walking
     
     public enum ControlScheme
     {
@@ -28,8 +32,12 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (stepAudioSource == null)
+        {
+            stepAudioSource = GetComponent<AudioSource>();
+        }
         rb = GetComponent<Rigidbody>();
-        
+        animator = GetComponentInChildren<Animator>();
         // Check if we're on mobile and should show joystick
         #if UNITY_ANDROID || UNITY_IOS
         if (showMobileJoystick && joystickPrefab != null)
@@ -43,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float h = 0f, v = 0f;
-
+        animator.SetFloat("MovementSpeed", moveDirection.magnitude);
         switch (controlScheme)
         {
             case ControlScheme.WASD:
@@ -64,6 +72,24 @@ public class PlayerMovement : MonoBehaviour
         
         // Handle rotation towards movement direction
         HandleRotation();
+
+
+         bool isMoving = moveDirection.magnitude > minMoveThreshold; // or use rb.velocity.magnitude
+
+        if (isMoving)
+        {
+            if (!stepAudioSource.isPlaying)
+            {
+                stepAudioSource.Play();
+            }
+        }
+        else
+        {
+            if (stepAudioSource.isPlaying)
+            {
+                stepAudioSource.Stop(); // or .Stop() if you want to restart from the beginning
+            }
+        }
     }
     
     void FixedUpdate()
