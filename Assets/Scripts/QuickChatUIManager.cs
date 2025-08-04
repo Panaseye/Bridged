@@ -16,6 +16,10 @@ public class QuickChatUIManager : MonoBehaviour
     public Transform iconGridPanel; // Where icon buttons are instantiated
     public GameObject iconButtonPrefab; // Prefab for icon selection buttons
     public List<Sprite> availableIcons; // Assign your icon sprites here
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip clickSound;
+    [SerializeField] private AudioClip sendSound;
+    [SerializeField] private AudioClip toggleSound;
 
     [Header("Bubble Icon Image Prefab")]
     public GameObject bubbleIconImagePrefab; // Assign in Inspector
@@ -33,11 +37,13 @@ public class QuickChatUIManager : MonoBehaviour
     public void ToggleTray()
     {
         trayPanel.SetActive(!trayPanel.activeSelf);
+        audioSource.PlayOneShot(toggleSound, 0.5f);  
     }
 
     public void AddIconToMessage(Sprite icon)
     {
         selectedIcons.Add(icon);
+        audioSource.PlayOneShot(clickSound, 0.5f);
         Debug.Log("Added icon: " + icon.name + " | Total: " + selectedIcons.Count);
         GameObject imgObj = Instantiate(iconImagePrefab, messageLinePanel);
         imgObj.GetComponent<Image>().sprite = icon;
@@ -59,6 +65,7 @@ public class QuickChatUIManager : MonoBehaviour
     if (selectedIcons.Count > 0 && playerSpeechBubble != null)
         {
         playerSpeechBubble.ShowBubble(selectedIcons);
+        audioSource.PlayOneShot(sendSound, 0.5f);
             ClearMessageLine();
             trayPanel.SetActive(false);
         }
