@@ -4,14 +4,22 @@ public class CameraFollow : MonoBehaviour
 {
     [Header("Follow Settings")]
     [SerializeField] private Transform target;
-    [SerializeField] private Vector3 offset = new Vector3(0, 5, -10);
+    [SerializeField] private Vector3 normalOffset = new Vector3(0, 10, -10);
+    [SerializeField] private Vector3 mazerOffset = new Vector3(0, 10, 0);
+    [SerializeField] private Vector3 mazeMasterOffset = new Vector3(0, 5, -10);
     [SerializeField] private float followSpeed = 5f;
     
     [Header("Rotation Settings")]
     [SerializeField] private bool lockRotation = true;
-    [SerializeField] private Vector3 lockedRotation = new Vector3(15, 0, 0); // Default camera angle
-    
+    [SerializeField] private Vector3 normallockedRotation = new Vector3(40, 0, 0); // Default camera angle
+    [SerializeField] private Vector3 mazerlockedRotation = new Vector3(90, 0, 0); // Default camera angle
+    [SerializeField] private Vector3 mazeMasterlockedRotation = new Vector3(15, 0, 0); // Default camera angle
     private Vector3 targetPosition;
+
+    public bool normalMode;
+    public bool mazerMode;
+    public bool mazeMasterMode;
+    public GameObject mazeMasterCameraPos;
     
     void Start()
     {
@@ -23,49 +31,61 @@ public class CameraFollow : MonoBehaviour
             {
                 target = player.transform;
             }
+
+            normalMode = true;
+            mazerMode = false;
+            mazeMasterMode = false;
         }
         
         // Set initial rotation if locking rotation
         if (lockRotation)
         {
-            transform.rotation = Quaternion.Euler(lockedRotation);
+            transform.rotation = Quaternion.Euler(normallockedRotation);
         }
     }
     
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (target == null) return;
-        
-        // Calculate target position
-        targetPosition = target.position + offset;
-        
-        // Smoothly move camera to target position
-        transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
-        
-        // Keep rotation locked if enabled
-        if (lockRotation)
+
+        if (normalMode)
         {
-            transform.rotation = Quaternion.Euler(lockedRotation);
+            // Calculate target position
+            targetPosition = target.position + normalOffset;
+            // Smoothly move camera to target position
+            transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
+            // Keep rotation locked if enabled
+            if (lockRotation)
+            {
+                transform.rotation = Quaternion.Euler(normallockedRotation);
+            }
+
+        }
+        else if (mazerMode)
+        {
+            // Calculate target position
+            targetPosition = target.position + mazerOffset;
+            // Smoothly move camera to target position
+            transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
+            // Keep rotation locked if enabled
+            if (lockRotation)
+            {
+                transform.rotation = Quaternion.Euler(mazerlockedRotation);
+            }
+
+        }
+        else if (mazeMasterMode)
+        {
+            // Calculate target position
+            targetPosition = mazeMasterCameraPos.transform.position;
+            // Smoothly move camera to target position
+            transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
+            // Keep rotation locked if enabled
+            if (lockRotation)
+            {
+                transform.rotation = Quaternion.Euler(mazeMasterlockedRotation);
+            }
         }
     }
-    
-    // Public method to change the locked rotation
-    public void SetLockedRotation(Vector3 newRotation)
-    {
-        lockedRotation = newRotation;
-        if (lockRotation)
-        {
-            transform.rotation = Quaternion.Euler(lockedRotation);
-        }
-    }
-    
-    // Public method to toggle rotation lock
-    public void ToggleRotationLock(bool lockRot)
-    {
-        lockRotation = lockRot;
-        if (lockRotation)
-        {
-            transform.rotation = Quaternion.Euler(lockedRotation);
-        }
-    }
+
 } 

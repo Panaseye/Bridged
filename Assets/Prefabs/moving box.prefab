@@ -49,6 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   directionLeft: 1
+  isMovementOn: 0
+  movementOverride: 0
+  noMovementOverride: 0
   movingPlatform: 1
   turningObstacle: 0
   obstacleToMove: {fileID: 3404422973230516410}
@@ -184,7 +187,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -720
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3407241646427941569, guid: 36f516ee0051d4f36a317a98d07395fe, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4450223086135531676, guid: 36f516ee0051d4f36a317a98d07395fe, type: 3}
     - {fileID: 161464472579627998, guid: 36f516ee0051d4f36a317a98d07395fe, type: 3}

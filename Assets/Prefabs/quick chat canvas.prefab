@@ -421,13 +421,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 63640218136c04b7a8849472e95e2d31, type: 3}
   - {fileID: 21300000, guid: f1081835cb2b24a29987f0d884c5f866, type: 3}
   - {fileID: 21300000, guid: 9357fbc3c12174d96a2d6c34996c7311, type: 3}
-  - {fileID: 21300000, guid: 2a466120cbe444b28bcd509f05ab0019, type: 3}
+  - {fileID: 21300000, guid: fac2ef04a84604612bcd229c630ba634, type: 3}
+  - {fileID: 21300000, guid: da51ff59278ef4c869fde597ec442beb, type: 3}
   - {fileID: 21300000, guid: a0c3780f6aaa642e9b3da48ee6b517bf, type: 3}
   - {fileID: 21300000, guid: e6a97919c1bf8427b93acf4b3ceeab05, type: 3}
   - {fileID: 21300000, guid: 7ca8a254d461e4a60a4997e223c596cc, type: 3}
   - {fileID: 21300000, guid: 095f51e55bca24f3b9611310e21a30cb, type: 3}
   - {fileID: 21300000, guid: 6ad1aae319415477394ae3653354e84d, type: 3}
   - {fileID: 21300000, guid: 859476652abcd49829f357f89b4dd052, type: 3}
+  - {fileID: 21300000, guid: a46b14ac9d1354c3ba6e5b6f553ae1d3, type: 3}
+  - {fileID: 21300000, guid: 1c3a993cfad144beab3d89bb86109f84, type: 3}
   audioSource: {fileID: 7256549151066599399}
   clickSound: {fileID: 8300000, guid: dd14d907322f743a0b81acedac42e748, type: 3}
   sendSound: {fileID: 8300000, guid: b8c03bafdfd484c0b9c2c56fa378069e, type: 3}
@@ -1030,7 +1033,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Chat
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
