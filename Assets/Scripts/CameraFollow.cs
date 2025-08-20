@@ -42,6 +42,8 @@ public class CameraFollow : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(normallockedRotation);
         }
+
+        normalMode = true;
     }
     
     void FixedUpdate()
