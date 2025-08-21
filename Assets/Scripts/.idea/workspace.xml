@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="67ac566c-0997-48ce-896e-8db800b59b62" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Scenes/Playground.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/Playground.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scenes/Remix.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/Remix.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CameraFollow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CameraFollow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/Playground.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/Remix.unity" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +55,7 @@
       <workItem from="1752161135657" duration="2000" />
       <workItem from="1752331999435" duration="1000" />
       <workItem from="1753965509601" duration="1948000" />
-      <workItem from="1755339623619" duration="846000" />
+      <workItem from="1755339623619" duration="1458000" />
     </task>
     <servers />
   </component>
